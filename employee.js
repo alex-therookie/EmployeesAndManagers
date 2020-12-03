@@ -1,9 +1,10 @@
 class Employee {
     constructor(name, title, salary, boss) {
       this.name = name;
-      this.title = title;
       this.salary = salary;
+      this.title = title;
       this.boss = boss;
+      if (boss) boss.addTeamMember(this);
     }
   bonus(multiplier) { 
     return this.salary * multiplier
@@ -11,5 +12,5 @@ class Employee {
 }
 
 module.exports = {
-    Employee
-}
+  Employee
+};

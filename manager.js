@@ -3,17 +3,21 @@ const { Employee
 
 class Manager extends Employee {
     constructor(name, title, salary, boss, team) {
-        super(name, title, salary, boss)
+      super(name, title, salary, boss)
       this.team = []
     }
-  addTeamMember(name) { 
-      this.team.push(name)
+  addTeamMember(employee) { 
+      this.team.push(employee)
   }
   totalSubSalary() { 
-    let totalEmployeeSalary = this.team.reduce((acc, el) => {
-        return acc.salary += el.salary
-      })
-    return totalEmployeeSalary + this.salary;
+    let totalSubSalary = 0;
+    this.team.forEach((employee) => { 
+      if (employee instanceof Manager) {
+        totalSubSalary += employee.salary + employee.totalSubSalary();
+      } else { 
+        totalSubSalary += employee.salary;
+      }
+    })
   }
   
   bonus(multiplier) { 
